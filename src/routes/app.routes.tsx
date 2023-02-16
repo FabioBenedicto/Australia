@@ -1,9 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import useDarkTheme from '../hooks/useDarkTheme';
-import LIGHT from '../theme/light';
-import DEFAULT from '../theme/default';
-import DARK from '../theme/dark';
+import { LIGHT } from '../theme/light';
+import { DARK } from '../theme/dark';
 
 export default function AppRoutes() {
     const { Navigator, Screen } = createStackNavigator();
@@ -13,18 +12,12 @@ export default function AppRoutes() {
         <Navigator
             initialRouteName="HomeScreen"
             screenOptions={{
-                // headerShown: true,
-                // headerTransparent: true,
                 headerStyle: {
                     backgroundColor: DEFAULT.COLORS.BLUE.MEDIUM,
                 },
                 cardStyle: {
                     backgroundColor: darkTheme ? DARK.COLORS.BACKGROUND : LIGHT.COLORS.BACKGROUND,
-                },
-                headerTitleStyle: {
-                    fontSize: 0,
-                },
-                headerTitleAlign: 'center',
+                }
             }}
         >
             <Screen name="ProfileScreen" component={ProfileScreen} options={{ title: 'Perfil' }} />

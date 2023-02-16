@@ -7,11 +7,17 @@ import MyLockerLogoPaintedWhite from '../../assets/ShortLogoWhite.png';
 import { styles } from "./styles";
 
 export interface LogoProps {
-    darkTheme: boolean;
+  darkTheme: boolean;
 }
 
 export function Logo({ darkTheme }: LogoProps) {
-    return (
-        <Image source={darkTheme ? MyLockerLogoPaintedWhite : MyLockerLogo} style={styles.image} />
-    )
+  return (
+    <Image
+      source={darkTheme
+        ? MyLockerLogoPaintedWhite
+        : MyLockerLogo}
+      style={styles.image}
+
+    />
+  )
 }

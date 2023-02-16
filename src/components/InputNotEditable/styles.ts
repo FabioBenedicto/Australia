@@ -1,12 +1,14 @@
 import { StyleSheet } from 'react-native';
-import light from '../../theme/light';
+import { LIGHT } from '../../theme/light';
 
 export const styles = StyleSheet.create({
     input: {
-        width: '80%',
+        maxWidth: '100%',
         alignSelf: 'center',
-        fontSize: light.FONT_SIZE.MD,
+        fontSize: LIGHT.FONT_SIZE.MD,
         borderRadius: 20,
-        padding: 5,
+        padding: 10,
+        elevation: 6,
+        marginBottom: 10,
     }
 });

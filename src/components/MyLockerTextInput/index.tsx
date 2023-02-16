@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, TextInput, Touchable, TouchableOpacity, TextInputProps, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
 
+import { Eye, EyeSlash } from 'phosphor-react-native';
 
-import { Eye, EyeSlash } from 'phosphor-react-native'
+import { LIGHT } from '../../theme/light';
+import { DARK } from '../../theme/dark';
 
 import { styles } from './styles';
 
@@ -11,17 +13,20 @@ export interface MyLockerTextInputProps extends TextInputProps {
     darkTheme: boolean;
 }
 
+export interface ShowPasswordButtonProps {
+  showPassword: boolean;
+  setShowPassword: (value: boolean) => void;
+  color: string;
+}
 
-export function ShowPassword() {
-
-    const [hidePassword, setHidePassword] = useState(true);
+export function ShowPasswordButton({showPassword, setShowPassword, color} : ShowPasswordButtonProps) {
 
     return (
-        <TouchableOpacity onPress={() => { setHidePassword(!hidePassword); }}>
+        <TouchableOpacity onPress={() => { setShowPassword(!showPassword); }} style={styles.button}>
             {
-                hidePassword
-                    ? <Eye color='black' size={20} />
-                    : <EyeSlash color='black' size={20} />
+                showPassword
+                    ? <EyeSlash color={color} size={20} weight='bold'/>
+                    : <Eye color={color} size={20} weight='bold'/>
             }
         </TouchableOpacity>
     )
@@ -30,21 +35,23 @@ export function ShowPassword() {
 export function MyLockerTextInput({ isPasswordTextInput, darkTheme, ...props }: MyLockerTextInputProps) {
 
     const [inputWidth, setInputWidth] = useState(0);
+    const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: darkTheme ? DARK.COLORS.BACKGROUND_INPUT : LIGHT.COLORS.BACKGROUND_INPUT}]}>
             <TextInput
                 onLayout={(event) => {
                     setInputWidth(event.nativeEvent.layout.height);
                 }}
-                style={[styles.textInput, { width: inputWidth }]} {...props} />
-            {
-                isPasswordTextInput
-                    ? <ShowPassword />
-                    : null
+                secureTextEntry={isPasswordTextInput ? !showPassword : false}
+                cursorColor={darkTheme ? DARK.COLORS.TEXT_PRIMARY : LIGHT.COLORS.TEXT_PRIMARY}
+                style={[styles.textInput, {width: inputWidth,  color:  darkTheme ? DARK.COLORS.TEXT_PRIMARY : LIGHT.COLORS.TEXT_PRIMARY, backgroundColor: darkTheme ? DARK.COLORS.BACKGROUND_INPUT : LIGHT.COLORS.BACKGROUND_INPUT}]} {...props} />
 
-            }
+              {
+                isPasswordTextInput
+                ? <ShowPasswordButton showPassword={showPassword} setShowPassword={setShowPassword} color={darkTheme ? DARK.COLORS.TEXT_PRIMARY : LIGHT.COLORS.TEXT_PRIMARY}/>
+                : null
+              }
         </View>
     )
 }
-20

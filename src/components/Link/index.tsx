@@ -3,8 +3,7 @@ import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 import { MyLockerText } from "../MyLockerText";
 
-import light from "../../theme/light";
-import dark from "../../theme/dark";
+import { LIGHT } from "../../theme/light";
 
 import { styles } from "./styles";
 
@@ -16,7 +15,7 @@ export interface LinkProps extends TouchableOpacityProps {
 export function Link({ children, darkTheme, ...props }: LinkProps) {
     return (
         <TouchableOpacity style={styles.container} {...props}>
-            <MyLockerText color={darkTheme ? light.COLORS.BACKGROUND_BUTTON : dark.COLORS.BACKGROUND_BUTTON}>
+            <MyLockerText color={LIGHT.COLORS.BACKGROUND_BUTTON}>
                 {children}
             </MyLockerText>
         </TouchableOpacity>
